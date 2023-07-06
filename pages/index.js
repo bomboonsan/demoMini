@@ -17,7 +17,8 @@ export default function Home() {
     const loginWithLine = async () => {
       const liffUrl = 'https://liff.line.me/2000001237-XG1RrrYn';
       const liffId = '2000001237-XG1RrrYn';
-      const lineOAUrl = 'https://lin.ee/jNXQe85';
+      // const lineOAUrl = 'https://lin.ee/jNXQe85';
+      const lineOAUrl = 'https://line.me/R/ti/p/@313gqupk';
 
       await liff.init({ liffId });
       
@@ -35,7 +36,8 @@ export default function Home() {
           } else {
             liff.openWindow({
               url: lineOAUrl,
-              external: true,
+              // external: true,
+              external: false,
             });
           }
         } catch (error) {
