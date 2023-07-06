@@ -26,8 +26,12 @@ export default function Home() {
           const profile = await liff.getProfile();
           const userId = profile.userId;
 
+          console.log('userId: '+userId)
+
           const friendshipStatus = await checkFriendshipStatus(userId);
           
+          console.log(friendshipStatus)
+
           if (friendshipStatus) {
             window.location.href = liffUrl;
           } else {
@@ -55,7 +59,7 @@ export default function Home() {
     const API_ENDPOINT = `https://api.line.me/v2/bot/friendship/${userId}/status`;
     const response = await fetch(API_ENDPOINT, {
       headers: {
-        'Authorization': `Bearer da0f25e805f48f1d7cef3c976b763275`,
+        'Authorization': `Bearer PjpuUdB71ZjPZ+00yFlejowc1Su1J47TSBlq1IK9jfKC53u7gTCkw35r4/v5zex7gbVSwBwEVbSmPBiYsDL8iNMllhH3Rq60ChdUNuYpL9KyJCbVXQRN073Bxs5GLYswsmUnbIZx1/PmBnFNGSBdmwdB04t89/1O/w1cDnyilFU=`,
       },
     });
 
