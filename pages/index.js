@@ -26,7 +26,9 @@ export default function Home() {
         const userId = profile.userId;
 
         try {
-          const isFriend = await liff.isFriend(liff.getOS(), userId);
+          // const isFriend = await liff.isFriend(liff.getOS(), userId);
+          const isFriendData = await liff.getFriendship();
+          const isFriend = isFriendData.friendFlag
 
           if (isFriend) {
             window.location.href = liffUrl;
@@ -39,6 +41,7 @@ export default function Home() {
         } catch (error) {
           console.log(error);
         }
+
       } else {
         liff.login();
       }
