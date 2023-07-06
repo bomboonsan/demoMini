@@ -3,12 +3,12 @@ import Head from 'next/head';
 import liff from '@line/liff';
 
 const LineLogin = () => {
-    
+
   useEffect(() => {
     const loginWithLine = async () => {
-      const liffUrl = 'YOUR_LIFF_URL';
-      const liffId = 'YOUR_LIFF_ID';
-      const lineOAUrl = 'YOUR_LINE_OA_FRIEND_URL';
+      const liffUrl = 'https://liff.line.me/2000001237-XG1RrrYn';
+      const liffId = '2000001237-XG1RrrYn';
+      const lineOAUrl = 'https://lin.ee/jNXQe85';
 
       await liff.init({ liffId });
       
