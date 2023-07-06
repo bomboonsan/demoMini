@@ -3,6 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@line/liff': ^2.22.2
   autoprefixer: 10.4.14
+  axios: ^1.4.0
   daisyui: ^3.1.9
   eslint: 8.44.0
   eslint-config-next: 13.4.8
@@ -16,6 +17,7 @@ specifiers:
 dependencies:
   '@line/liff': 2.22.2
   autoprefixer: 10.4.14_postcss@8.4.25
+  axios: 1.4.0
   daisyui: 3.1.9_postcss@8.4.25
   eslint: 8.44.0
   eslint-config-next: 13.4.8_eslint@8.44.0
@@ -1132,6 +1134,16 @@ packages:
     dependencies:
       follow-redirects: 1.15.2
       form-data: 4.0.0
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
+  /axios/1.4.0:
+    resolution: {integrity: sha512-S4XCWMEmzvo64T9GfvQDOXgYRDJ/wsSZc7Jvdgx5u1sd0JwsuPLqb3SYmusag+edF6ziyMensPVqLTSc1PiSEA==}
+    dependencies:
+      follow-redirects: 1.15.2
+      form-data: 4.0.0
+      proxy-from-env: 1.1.0
     transitivePeerDependencies:
       - debug
     dev: false
@@ -2937,6 +2949,10 @@ packages:
       loose-envify: 1.4.0
       object-assign: 4.1.1
       react-is: 16.13.1
+    dev: false
+
+  /proxy-from-env/1.1.0:
+    resolution: {integrity: sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==}
     dev: false
 
   /punycode/2.3.0:

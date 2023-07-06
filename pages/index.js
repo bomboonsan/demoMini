@@ -54,19 +54,24 @@ export default function Home() {
 
 
   const checkFriendshipStatus = async (userId) => {
-    // Perform an API request to check the friendship status using the LINE Messaging API
-    // Replace the API_ENDPOINT with the actual endpoint to check the friendship status
-    const API_ENDPOINT = `https://api.line.me/v2/bot/friendship/${userId}/status`;
-    const response = await fetch(API_ENDPOINT, {
-      headers: {
-        'Authorization': `Bearer PjpuUdB71ZjPZ+00yFlejowc1Su1J47TSBlq1IK9jfKC53u7gTCkw35r4/v5zex7gbVSwBwEVbSmPBiYsDL8iNMllhH3Rq60ChdUNuYpL9KyJCbVXQRN073Bxs5GLYswsmUnbIZx1/PmBnFNGSBdmwdB04t89/1O/w1cDnyilFU=`,
-      },
-    });
+    try {
+      const response = await axios.get(
+        `https://api.line.me/v2/bot/friendship/${userId}/status`,
+        {
+          headers: {
+            'Authorization': `Bearer PjpuUdB71ZjPZ+00yFlejowc1Su1J47TSBlq1IK9jfKC53u7gTCkw35r4/v5zex7gbVSwBwEVbSmPBiYsDL8iNMllhH3Rq60ChdUNuYpL9KyJCbVXQRN073Bxs5GLYswsmUnbIZx1/PmBnFNGSBdmwdB04t89/1O/w1cDnyilFU=`,
+          },
+        }
+      );
 
-    if (response.ok) {
-      const data = await response.json();
-      return data.friendFlag === 1;
-    } else {
+      if (response.status === 200) {
+        const data = response.data;
+        return data.friendFlag === 1;
+      } else {
+        throw new Error('Failed to check friendship status');
+      }
+    } catch (error) {
+      console.log(error);
       throw new Error('Failed to check friendship status');
     }
   };
