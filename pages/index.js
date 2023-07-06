@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Head from 'next/head'
 import Link from 'next/link'
 import { Inter } from 'next/font/google'
-import axios from 'axios';
+
 import Layout from '../components/layouts/frontend/layout'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -22,18 +22,16 @@ export default function Home() {
       await liff.init({ liffId });
       
       if (liff.isLoggedIn()) {
+        const profile = await liff.getProfile();
+        const userId = profile.userId;
+
         try {
-          const profile = await liff.getProfile();
-          const userId = profile.userId;
-
-          console.log('userId: '+userId)
-
-          const friendshipStatus = await checkFriendshipStatus(userId);
-          
-          console.log(friendshipStatus)
-
-          if (friendshipStatus) {
-            window.location.href = liffUrl;
+          // const isFriend = await liff.isFriend(liff.getOS(), userId);
+          const isFriendData = await liff.getFriendship();
+          const isFriend = isFriendData.friendFlag
+          console.log(isFriendData)
+          if (isFriend) {
+            // window.location.href = liffUrl;
           } else {
             liff.openWindow({
               url: lineOAUrl,
@@ -43,6 +41,7 @@ export default function Home() {
         } catch (error) {
           console.log(error);
         }
+
       } else {
         liff.login();
       }
@@ -50,32 +49,6 @@ export default function Home() {
 
     loginWithLine();
   }, []);
-
-
-
-  const checkFriendshipStatus = async (userId) => {
-    try {
-      const response = await axios.get(
-        `https://api.line.me/v2/bot/friendship/${userId}/status`,
-        {
-          headers: {
-            'Authorization': `Bearer PjpuUdB71ZjPZ+00yFlejowc1Su1J47TSBlq1IK9jfKC53u7gTCkw35r4/v5zex7gbVSwBwEVbSmPBiYsDL8iNMllhH3Rq60ChdUNuYpL9KyJCbVXQRN073Bxs5GLYswsmUnbIZx1/PmBnFNGSBdmwdB04t89/1O/w1cDnyilFU=`,
-          },
-        }
-      );
-
-      if (response.status === 200) {
-        const data = response.data;
-        return data.friendFlag === 1;
-      } else {
-        throw new Error('Failed to check friendship status');
-      }
-    } catch (error) {
-      console.log(error);
-      throw new Error('Failed to check friendship status');
-    }
-  };
-
 
 
   return (
