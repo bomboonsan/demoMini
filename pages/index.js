@@ -29,7 +29,7 @@ export default function Home() {
           // const isFriend = await liff.isFriend(liff.getOS(), userId);
           const isFriendData = await liff.getFriendship();
           const isFriend = isFriendData.friendFlag
-          console.log('isFriendData'+isFriendData)
+          console.log(isFriendData)
           if (isFriend) {
             // window.location.href = liffUrl;
           } else {
