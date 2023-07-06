@@ -22,16 +22,14 @@ export default function Home() {
       await liff.init({ liffId });
       
       if (liff.isLoggedIn()) {
-        const profile = await liff.getProfile();
-        const userId = profile.userId;
-
         try {
-          // const isFriend = await liff.isFriend(liff.getOS(), userId);
-          const isFriendData = await liff.getFriendship();
-          const isFriend = isFriendData.friendFlag
-          console.log(isFriendData)
-          if (isFriend) {
-            // window.location.href = liffUrl;
+          const profile = await liff.getProfile();
+          const userId = profile.userId;
+
+          const friendshipStatus = await checkFriendshipStatus(userId);
+          
+          if (friendshipStatus) {
+            window.location.href = liffUrl;
           } else {
             liff.openWindow({
               url: lineOAUrl,
@@ -41,7 +39,6 @@ export default function Home() {
         } catch (error) {
           console.log(error);
         }
-
       } else {
         liff.login();
       }
@@ -49,6 +46,27 @@ export default function Home() {
 
     loginWithLine();
   }, []);
+
+
+
+  const checkFriendshipStatus = async (userId) => {
+    // Perform an API request to check the friendship status using the LINE Messaging API
+    // Replace the API_ENDPOINT with the actual endpoint to check the friendship status
+    const API_ENDPOINT = `https://api.line.me/v2/bot/friendship/${userId}/status`;
+    const response = await fetch(API_ENDPOINT, {
+      headers: {
+        'Authorization': `Bearer da0f25e805f48f1d7cef3c976b763275`,
+      },
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      return data.friendFlag === 1;
+    } else {
+      throw new Error('Failed to check friendship status');
+    }
+  };
+
 
 
   return (
