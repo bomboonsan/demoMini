@@ -34,11 +34,11 @@ export default function Home() {
           if (isFriend) {
             // window.location.href = liffUrl;
           } else {
-            liff.openWindow({
-              url: lineOAUrl,
-              // external: true,
-              external: false,
-            });
+            // liff.openWindow({
+            //   url: lineOAUrl,
+            //   // external: true,
+            //   external: false,
+            // });
           }
         } catch (error) {
           console.log(error);
