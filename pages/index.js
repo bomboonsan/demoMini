@@ -18,7 +18,7 @@ export default function Home() {
       const liffUrl = 'https://liff.line.me/2000001237-XG1RrrYn';
       const liffId = '2000001237-XG1RrrYn';
       // const lineOAUrl = 'https://lin.ee/jNXQe85';
-      const lineOAUrl = 'https://line.me/R/ti/p/@163nxguy';
+      const lineOAUrl = 'https://line.me/R/ti/p/@163nxguy'; 
 
       await liff.init({ liffId });
       
